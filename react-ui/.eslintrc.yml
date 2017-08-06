@@ -1,0 +1,22 @@
+extend: airbnb
+parser: 'babel-eslint'
+plugins:
+  - react
+  - jsx-a11y
+  - import
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+    modules: true
+env:
+  browser: true
+globals:
+  window: true
+  navigator: true
+rules:
+  #******React Rules*********
+  react/jsx-filename-extension: 0
+  react/jsx-uses-react: 2
+  react/jsx-uses-vars: 2
+  react/react-in-jsx-scope: 2
+  class-methods-use-this: 0
