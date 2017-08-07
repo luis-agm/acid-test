@@ -4,7 +4,7 @@
   "description": "Technical test for acid-labs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon lib/index.js --exec babel-node",
+    "start": "nodemon lib/index.js --exec babel-node --ignore react-ui/",
     "debug": "nodemon --inspect lib/index.js --exec babel-node",
     "build": "babel lib -d dist",
     "serve": "node dist/index.js",
@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.4.0",

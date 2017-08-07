@@ -1,0 +1,14 @@
+
+t	      Ticker
+e	      Exchange
+l	      Last Price
+ltt	    Last Trade Time
+l	      Price
+lt	    Last Trade Time Formatted
+lt_dts	Last Trade Date/Time
+c	      Change
+cp	    Change Percentage
+el	    After Hours Last Price
+elt	    After Hours Last Trade Time Formatted
+div	    Dividend
+yld	    Dividend Yield
