@@ -29,6 +29,9 @@
     "axios": "^0.16.2",
     "eslint-config-standard": "^10.2.1",
     "finalhandler": "^1.0.4",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "morgan": "^1.8.2",
     "nunjucks": "^3.0.1",
     "socket.io": "^2.0.3"

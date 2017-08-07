@@ -6,9 +6,9 @@ const stockItem = ( { stock } ) => {
     <div className='stock-item'>
       <h2 className='stock-item__title'>{ stock.t }</h2>
       <div className='stock-item__info'>
-        <span>Last price: { stock.l }</span>
-        <span>Last traded: { stock.lt }</span>
-        <span>Change: { stock.c }/{ stock.cp }%</span>
+        <span><strong>Last price:</strong> { stock.l }</span>
+        <span><strong>Last traded:</strong> { stock.lt }</span>
+        <span><strong>Change:</strong> { stock.c }/{ stock.cp }%</span>
         <span></span>
       </div>
     </div>

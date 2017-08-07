@@ -25,6 +25,8 @@ class App extends Component {
           <h2>Stocks App</h2>
         </div>
         <div className='App-content'>
+          { this.props.closed === 'night' && <span className='warning-message'>Market closed until 9:30am EST</span>}
+          { this.props.closed === 'weekend' && <span className='warning-message'>Market closed until Monday 9:30am EST</span>}
           <StockList stocks={this.props.stocks}/>
         </div>
       </div>
@@ -35,7 +37,8 @@ class App extends Component {
 function mapStateToProps ( state ) {
   return {
     stocks: state.stocks.all,
-    current: state.stocks.current
+    current: state.stocks.current,
+    closed: 'weekend'
   }
 }
 
