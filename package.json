@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
     "bluebird": "^3.5.0",
     "eslint-config-standard": "^10.2.1",
     "finalhandler": "^1.0.4",
