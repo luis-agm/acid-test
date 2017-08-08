@@ -59,13 +59,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /******************************/
 
 // const njk = new nunjucks.Environment( new nunjucks.FileSystemLoader( path.resolve( __dirname, '..', 'views' ) ), { autoescape: false } )
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 var publicDir = _path2.default.join(process.cwd(), 'react-ui', 'build'); // Public folder url to serve files from
 var logger = (0, _morgan2.default)('dev');
 
 _bluebird2.default.promisifyAll(_redis2.default.RedisClient.prototype);
 _bluebird2.default.promisifyAll(_redis2.default.Multi.prototype);
-var redis = _redis2.default.createClient();
+var redis = _redis2.default.createClient(process.env.REDIS_URL);
 
 redis.onAsync('error').then(function (error) {
   return console.log(error);
