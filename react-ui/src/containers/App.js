@@ -12,11 +12,21 @@ class App extends Component {
   constructor ( props ) {
     super( props )
     socket.on( 'newResults', results => {
-      console.log( 'wat' )
+      if ( this.props.error ) this.props.actions.clearError()
       this.props.actions.setStocks( results )
       console.log( this.props.stocks )
     } )
-    socket.emit( 'getStocks' )
+    socket.on( 'firstResults', results => {
+      if ( this.props.error === 'API' ) this.props.actions.clearError()
+      this.props.actions.setStocks( results )
+      console.log( this.props.stocks )
+    } )
+    socket.on( 'APIerror', () => {
+      this.props.actions.setError( 'API' )
+    } )
+    socket.on( 'marketClosed', () => {
+      this.props.actions.setError( 'CLOSED' )
+    } )
   }
   render () {
     return (
@@ -25,8 +35,8 @@ class App extends Component {
           <h2>Stocks App</h2>
         </div>
         <div className='App-content'>
-          { this.props.closed === 'night' && <span className='warning-message'>Market closed until 9:30am EST</span>}
-          { this.props.closed === 'weekend' && <span className='warning-message'>Market closed until Monday 9:30am EST</span>}
+          { this.props.error === 'API' && <span className='warning-message'>An error has occured while getting your stocks.</span>}
+          { this.props.error === 'CLOSED' && <span className='warning-message'>Market closed. We will refresh results once the market opens.</span>}
           <StockList stocks={this.props.stocks}/>
         </div>
       </div>
@@ -38,7 +48,7 @@ function mapStateToProps ( state ) {
   return {
     stocks: state.stocks.all,
     current: state.stocks.current,
-    closed: 'weekend'
+    error: state.stocks.error
   }
 }
 
