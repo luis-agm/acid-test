@@ -1,42 +1,38 @@
 import React, { Component } from 'react'
-import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import findInArray from 'lodash/find'
 import * as StockActions from '../redux/modules/stocks'
-import StockList from '../components/stockList'
+import * as SocketActions from '../redux/modules/socket'
+import StockList from '../components/StockList'
 import '../styles/Home.css'
-
-const socket = io()
 
 class Home extends Component {
   constructor ( props ) {
     super( props )
-
     this.setCurrentStock = this.setCurrentStock.bind( this )
   }
 
   componentWillMount () {
     // Sockets events
-    socket.on( 'newResults', results => {
+    this.props.socket.on( 'newResults', results => {
       if ( this.props.error ) this.props.actions.clearError()
       this.props.actions.setStocks( results )
-      console.log( this.props.stocks )
     } )
-    socket.on( 'firstResults', results => {
+    this.props.socket.on( 'firstResults', results => {
       if ( this.props.error === 'API' ) this.props.actions.clearError()
       this.props.actions.setStocks( results )
-      console.log( this.props.stocks )
     } )
-    socket.on( 'APIerror', () => {
+    this.props.socket.on( 'APIerror', () => {
       this.props.actions.setError( 'API' )
     } )
-    socket.on( 'marketClosed', () => {
+    this.props.socket.on( 'marketClosed', () => {
       this.props.actions.setError( 'CLOSED' )
     } )
   }
 
   setCurrentStock ( id ) {
-    return this.props.actions.setCurrent( id )
+    return this.props.actions.setCurrent( findInArray( this.props.stocks, { id } ) )
   }
 
   render () {
@@ -55,14 +51,15 @@ class Home extends Component {
 function mapStateToProps ( state ) {
   return {
     stocks: state.stocks.all,
-    current: state.stocks.current,
-    error: state.stocks.error
+    current: state.stocks.currentStock,
+    error: state.stocks.error,
+    socket: state.socket.socket
   }
 }
 
 function mapDispatchToProps ( dispatch ) {
   return {
-    actions: bindActionCreators( StockActions, dispatch )
+    actions: bindActionCreators( Object.assign( {}, StockActions, SocketActions ), dispatch )
   }
 }
 

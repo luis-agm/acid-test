@@ -4,10 +4,10 @@
   "description": "Technical test for acid-labs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon lib/index.js --exec babel-node --ignore react-ui/",
+    "dev": "nodemon lib/index.js --exec babel-node --ignore react-ui/",
     "debug": "nodemon --inspect lib/index.js --exec babel-node",
     "build": "babel lib -d dist",
-    "serve": "node dist/index.js",
+    "start": "node dist/index.js",
     "test": "test"
   },
   "author": "Luis González <luis.agm24@gmail.com>",

@@ -7,8 +7,6 @@ import Home from '../containers/Home'
 import StockHistory from '../containers/StockHistory'
 import Header from '../components/header'
 
-console.log( 'WAT', ConnectedRouter )
-
 export default class App extends React.Component {
   render () {
     return (

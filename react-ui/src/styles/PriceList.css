@@ -1,0 +1,11 @@
+.price-list {
+  width: 600px;
+  max-width: 90vw;
+  align-self: center;
+  overflow: visible;
+}
+
+.price-list__content {
+  border: 1px solid #afafaf;
+  border-radius: 3px;
+}

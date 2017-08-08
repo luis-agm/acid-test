@@ -1,0 +1,11 @@
+.Stock-history {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5vh 0;
+}
+
+.Stock-history__home-link {
+  align-self: flex-start;
+}

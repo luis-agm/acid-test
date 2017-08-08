@@ -1,5 +1,5 @@
 import React from 'react'
-import StockItem from './stockItem'
+import StockItem from './StockItem'
 import '../styles/StockList.css'
 
 const stockList = props => {
