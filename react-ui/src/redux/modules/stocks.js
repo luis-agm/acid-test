@@ -6,7 +6,7 @@ const CLEAR_ERROR = 'acid-test/stocks/CLEAR_ERROR'
 
 const initialState = {
   all: [],
-  currentStock: {},
+  currentStock: '',
   error: undefined
 }
 

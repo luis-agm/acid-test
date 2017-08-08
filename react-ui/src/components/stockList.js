@@ -4,7 +4,7 @@ import '../styles/StockList.css'
 
 const stockList = props => {
   const items = props.stocks.map( ( item ) => {
-    return ( <StockItem key={item.id} stock={item}/> )
+    return ( <StockItem key={item.id} stock={item} selectCurrent={props.selectStock}/> )
   } )
   return (
       <div className='stock-list'>

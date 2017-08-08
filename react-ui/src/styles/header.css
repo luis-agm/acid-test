@@ -1,0 +1,10 @@
+.Header {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  height: 10vh;
+  padding: 20px;
+  color: white;
+}
