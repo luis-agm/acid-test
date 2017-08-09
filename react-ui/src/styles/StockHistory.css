@@ -7,5 +7,6 @@
 }
 
 .Stock-history__home-link {
-  align-self: flex-start;
+  font-size: 1.3rem;
+  font-weight: 600;
 }

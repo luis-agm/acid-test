@@ -25,7 +25,7 @@ class StockHistory extends Component {
   render () {
     return (
       <div className='Stock-history'>
-        <Link to='/'>Home</Link>
+        <Link to='/' className='Stock-history__home-link'>Home</Link>
         <PriceList stock={this.props.current} prices={ this.props.prices }/>
       </div>
     )

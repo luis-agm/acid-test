@@ -15,6 +15,11 @@
   border: none;
 }
 
+.price-item:last-child {
+  animation: wat 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
 .price-item__text {
   transition: scale 0.2s ease-in-out, background 0.1s ease-in-out;
   pointer-events: none;
@@ -24,4 +29,9 @@
   transform: scale(1.1);
   border: 1px solid #afafaf;
    background-color: white;
+}
+
+@keyframes wat {
+  0% {background-color: red; opacity: 0;}
+  100% {background-color:white; opacity: 1;}
 }
