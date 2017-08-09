@@ -74,7 +74,6 @@ redis.onAsync('error').then(function (error) {
 /***************************************/
 
 var mainHandler = function mainHandler(req, res) {
-  console.log('wat');
   return logger(req, res, function (err) {
     if (err) return (0, _finalhandler2.default)(req, res)(err);
     return serverRouter(req, res);
@@ -98,7 +97,6 @@ var serverRouter = function serverRouter(req, res) {
 };
 
 var serveView = function serveView(req, res) {
-  // const finalResponse = njk.render( 'react-ui.njk', { stocks: resp.data } )
   res.writeHead(200, { 'Content-Type': 'text/html' });
   _fs2.default.createReadStream(_path2.default.join(publicDir, 'index.html')).pipe(res);
 };
@@ -148,9 +146,9 @@ var getStocks = function getStocks() {
           // If there is a last value, compare before saving
           redis.hgetAsync('last', stock.id).then(function (res) {
             if (res === stock.l) {
-              console.log('same as last');
+              // console.log( 'same as last' )
             } else {
-              console.log('New price for ' + stock.t + ', ' + stock.l);
+              // console.log( `New price for ${stock.t}, ${stock.l}` )
               var timestamp = +(0, _momentTimezone2.default)();
               redis.hsetAsync(stock.id, stock.l, timestamp).then(function (res) {
                 io.to('details-' + stock.id).emit('newPrice', { price: stock.l, date: timestamp });
