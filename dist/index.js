@@ -181,7 +181,7 @@ var getStockHistory = function getStockHistory(id) {
 /***********************************/
 
 var app = _http2.default.createServer(mainHandler);
-app.listen(PORT, 'localhost');
+app.listen(PORT);
 
 console.log('Server running on port ' + PORT);
 
