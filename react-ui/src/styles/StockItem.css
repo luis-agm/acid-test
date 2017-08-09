@@ -3,9 +3,11 @@
   flex-flow: row nowrap;
   justify-content: space-around;
   align-items: center;
+  background-color: transparent;
   border-bottom: 1px solid #afafaf;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  overflow: visible;
   padding: 5px 0;
 }
 
@@ -13,8 +15,10 @@
   border: none;
 }
 
-.stock-item:hover{
-  background-color: #dddddd;
+.stock-item:hover {
+  transform: scale(1.05);
+  border: 1px solid #afafaf;
+   background-color: #dddddd;
 }
 
 .stock-item__title {

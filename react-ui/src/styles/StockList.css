@@ -4,7 +4,7 @@
   align-self: center;
   border: 1px solid #afafaf;
   border-radius: 3px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .stock-list a {

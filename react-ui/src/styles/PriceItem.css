@@ -21,7 +21,7 @@
 }
 
 .price-item:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   border: 1px solid #afafaf;
    background-color: white;
 }
