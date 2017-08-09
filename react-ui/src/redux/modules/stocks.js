@@ -2,6 +2,8 @@
 const SET_STOCKS = 'acid-test/stocks/SET_STOCKS'
 const SET_CURRENT = 'acid-test/stocks/SET_CURRENT'
 const SET_CURRENT_PRICES = 'acid-test/stocks/SET_CURRENT_PRICES'
+const CLEAR_CURRENT = 'acid-test/stocks/CLEAR_CURRENT'
+const UPDATE_CURRENT_PRICES = 'acid-test/stocks/UPDATE_CURRENT_PRICES'
 const SET_ERROR = 'acid-test/stocks/SET_ERROR'
 const CLEAR_ERROR = 'acid-test/stocks/CLEAR_ERROR'
 
@@ -37,6 +39,20 @@ export default function reducer ( state = initialState, action = {} ) {
         currentPrices: action.payload,
         error: state.error
       }
+    case CLEAR_CURRENT:
+      return {
+        all: state.all,
+        currentStock: {},
+        currentPrices: [],
+        error: state.error
+      }
+    case UPDATE_CURRENT_PRICES:
+      return {
+        all: state.all,
+        currentStock: state.currentStock,
+        currentPrices: state.currentPrices.concat( [action.payload] ),
+        error: state.error
+      }
     case SET_ERROR:
       return {
         all: state.all,
@@ -67,6 +83,14 @@ export function setCurrent ( payload ) {
 
 export function setCurrentPrices ( payload ) {
   return { type: SET_CURRENT_PRICES, payload }
+}
+
+export function updateCurrentPrices ( payload ) {
+  return { type: UPDATE_CURRENT_PRICES, payload }
+}
+
+export function clearCurrent () {
+  return { type: CLEAR_CURRENT }
 }
 
 export function setError ( payload ) {

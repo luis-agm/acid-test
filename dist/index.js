@@ -132,7 +132,7 @@ var staticFileHandler = function staticFileHandler(url, req, res) {
 
 var getStocks = function getStocks() {
   return _axios2.default.get('http://finance.google.com/finance/info?client=ig&q=AAPL,ABC,MSFT,TSLA,F').then(function (resp) {
-    // 'Math.rand' does not exist and 'Math.random' doesn't take any arguments, 0 and 1 is default range.
+    // Error faking
     if (Math.random() < 0.1) throw new Error('How unfortunate! The API Request Failed');
     var objectResponse = resp.data.substr(3); // remove weird double slash in response
     return JSON.parse(objectResponse);
@@ -153,8 +153,9 @@ var getStocks = function getStocks() {
               console.log('same as last');
             } else {
               console.log('New price for ' + stock.t);
-              redis.hsetAsync(stock.id, stock.l, +(0, _momentTimezone2.default)()).then(function (res) {
-                // DO SOMETHING HERE?
+              var timestamp = +(0, _momentTimezone2.default)();
+              redis.hsetAsync(stock.id, stock.l, timestamp).then(function (res) {
+                io.to('details-' + stock.id).emit('newPrice', { price: stock.l, date: timestamp });
               });
             }
           });
@@ -171,9 +172,9 @@ var getStocks = function getStocks() {
 // USE THIS MAYBE?
 var getStockHistory = function getStockHistory(id) {
   return redis.hgetallAsync(id).then(function (res) {
-    return _lodash2.default.orderBy(_lodash2.default.map(res, function (val, key) {
+    return _lodash2.default.sortBy(_lodash2.default.map(res, function (val, key) {
       return { price: key, date: val };
-    }), 'date', 'desc');
+    }), 'date');
   });
 };
 /***********************************/
@@ -250,9 +251,11 @@ io.on('connect', function (socket) {
             case 2:
               prices = _context2.sent;
 
-              socket.emit('newPrices', prices);
+              console.log('sending prices', id);
+              socket.emit('priceHistory', prices);
+              socket.join('details-' + id);
 
-            case 4:
+            case 6:
             case 'end':
               return _context2.stop();
           }
@@ -264,6 +267,9 @@ io.on('connect', function (socket) {
       return _ref2.apply(this, arguments);
     };
   }());
+  socket.on('stopUpdatingHistory', function (id) {
+    socket.leave('details-' + id);
+  });
   console.log('New connection: ', socket.id);
   if (isMarketClosed((0, _momentTimezone2.default)())) {
     socket.emit('marketClosed');

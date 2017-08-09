@@ -8,4 +8,6 @@
 .price-list__content {
   border: 1px solid #afafaf;
   border-radius: 3px;
+  display: flex;
+  flex-flow: column-reverse;
 }

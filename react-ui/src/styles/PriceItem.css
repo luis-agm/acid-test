@@ -11,7 +11,7 @@
   padding: 5px 0;
 }
 
-.price-item:last-child {
+.price-item:first-child {
   border: none;
 }
 

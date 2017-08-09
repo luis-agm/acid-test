@@ -8,10 +8,19 @@ import '../styles/StockHistory.css'
 
 class StockHistory extends Component {
   componentWillMount () {
-    this.props.socket.on( 'newPrices', ( newPrices ) => {
-      this.props.actions.setCurrentPrices( newPrices )
+    this.props.socket.on( 'priceHistory', ( priceHistory ) => {
+      console.log( 'it is passing' )
+      this.props.actions.setCurrentPrices( priceHistory )
+    } )
+    this.props.socket.on( 'newPrice', ( newPrice ) => {
+      this.props.actions.updateCurrentPrices( newPrice )
     } )
     this.props.socket.emit( 'getHistory', this.props.current.id )
+    console.log( 'THISONE', this.props.current.id )
+  }
+  componentWillUnmount () {
+    this.props.socket.emit( 'stopUpdatingHistory', this.props.current.id )
+    this.props.actions.clearCurrent()
   }
   render () {
     return (
