@@ -149,10 +149,11 @@ var getStocks = function getStocks() {
             if (res === stock.l) {
               console.log('same as last');
             } else {
-              console.log('New price for ' + stock.t);
+              console.log('New price for ' + stock.t + ', ' + stock.l);
               var timestamp = +(0, _momentTimezone2.default)();
               redis.hsetAsync(stock.id, stock.l, timestamp).then(function (res) {
                 io.to('details-' + stock.id).emit('newPrice', { price: stock.l, date: timestamp });
+                redis.hsetAsync('last', stock.id, stock.l);
               });
             }
           });
