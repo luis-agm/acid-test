@@ -56,6 +56,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /** ******* Configs ***********/
 /******************************/
 
+var MAIN_INTERVAL = 3500; // Milliseconds
 var PORT = process.env.PORT || 8080;
 var publicDir = _path2.default.join(process.cwd(), 'react-ui', 'build'); // Public folder url to serve files from
 var logger = (0, _morgan2.default)('dev');
@@ -312,4 +313,4 @@ setInterval(function () {
       };
     }());
   }
-}, 5000);
+}, MAIN_INTERVAL);
