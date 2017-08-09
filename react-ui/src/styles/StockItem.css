@@ -11,6 +11,10 @@
   padding: 5px 0;
 }
 
+.updated {
+  background-color: #ee6666;
+}
+
 .stock-item:last-child {
   border: none;
 }
